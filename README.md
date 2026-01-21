@@ -1,46 +1,73 @@
 # n8n-nodes-browcall-gate
 
-This is an n8n community node. It lets you use _app/service name_ in your n8n workflows.
+This is an n8n community node that allows you to integrate **[Browcall Gate](https://github.com/gys-dev/browcall-gate)** directly into your n8n workflows. It acts as a bridge, enabling n8n to communicate with the Browcall Extension via the `gpt-auto-api` backend.
 
-_App/service name_ is _one or two sentences describing the service this node integrates with_.
+<p align="center">
+  <img src="resource/n8n.png" alt="n8n Browcall Gate Node Illustration" width="600">
+</p>
 
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
+## 🚀 Overview
 
-[Installation](#installation)
-[Operations](#operations)
-[Credentials](#credentials)
-[Compatibility](#compatibility)
-[Usage](#usage)
-[Resources](#resources)
-[Version history](#version-history)
+The **Browcall Gate** node allows n8n workflows to "call" AI chat interfaces like ChatGPT or Perplexity. This is achieved by:
+1. Sending a request from n8n to the `gpt-auto-api`.
+2. The API forwarding the request to the active browser extension via WebSockets.
+3. The extension executing the prompt in the browser and returning the result back to n8n.
 
-## Installation
+## ⚙️ Features
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+- **Direct AI Integration**: Prompt ChatGPT or Perplexity directly from your workflow.
+- **Custom Output Formats**: Supports `text`, `markdown`, and `json` outputs.
+- **Dynamic Base URL**: Easily switch between local and production instances of the `gpt-auto-api`.
+- **Tool-Compatible**: Can be used as a tool within larger AI agent workflows in n8n.
 
-## Operations
+## 🛠 Local Installation (Development)
 
-_List the operations supported by your node._
+Since this node is currently only available locally, follow these steps to integrate it into your n8n instance:
 
-## Credentials
+### 1. Build the Node
+Navigate to this directory and build the typescript files:
+```bash
+cd packages/n8n-nodes-browcall-gate
+npm run build
+```
 
-_If users need to authenticate with the app/service, provide details here. You should include prerequisites (such as signing up with the service), available authentication methods, and how to set them up._
+### 2. Link the Node to n8n
+You need to make this package available to your local n8n installation.
 
-## Compatibility
+**In this directory:**
+```bash
+npm link
+```
 
-_State the minimum n8n version, as well as which versions you test against. You can also include any known version incompatibility issues._
+**In your n8n installation directory (where n8n is installed, e.g., `~/.n8n` or your n8n source folder):**
+```bash
+npm link n8n-nodes-browcall-gate
+```
 
-## Usage
+### 3. Restart n8n
+Restart your n8n process. The "Browcall Gate" node should now appear in your nodes list.
 
-_This is an optional section. Use it to help users with any difficult or confusing aspects of the node._
+## 📦 Distribution
+*Note: This node is currently in local development and not yet available on the npm registry.*
 
-_By the time users are looking for community nodes, they probably already know n8n basics. But if you expect new users, you can link to the [Try it out](https://docs.n8n.io/try-it-out/) documentation to help them get started._
+## 📖 Node Configuration
 
-## Resources
+### Parameters
+| Parameter | Description | Default |
+| :--- | :--- | :--- |
+| **Base URL** | The URL where your `gpt-auto-api` is running. | `http://localhost:8766/v1` |
+| **Resource** | Currently supports `Auto Message`. | `message` |
+| **Operation** | The action to perform (e.g., `Send Prompt`). | `chat` |
+| **Message** | The text prompt you want to send to the AI. | - |
+| **Format** | The format of the returned data (`text`, `markdown`, or `json`). | `text` |
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-* _Link to app/service documentation._
+## 🎬 Example Usage
 
-## Version history
+1. **Start the API**: Ensure `npm run serve` is running in the project root.
+2. **Open n8n**: Add the **Browcall Gate** node.
+3. **Configure**: Set the Base URL to your API address and enter your prompt.
+4. **Execute**: The node will trigger the browser extension and return the AI's response in your defined format.
 
-_This is another optional section. If your node has multiple versions, include a short description of available versions and what changed, as well as any compatibility impact._
+## 📄 License
+
+[MIT](LICENSE)
