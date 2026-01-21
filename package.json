@@ -1,0 +1,51 @@
+{
+  "name": "n8n-nodes-browcall-gate",
+  "version": "0.1.0",
+  "description": "Sample test n8n node package for Browcall Gate",
+  "license": "MIT",
+  "homepage": "",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "author": {
+    "name": "Tran Duc Y",
+    "email": "ducyk41cntt@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gys_dev/n8n-nodes-browcall-gate.git"
+  },
+  "scripts": {
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "release": "n8n-node release",
+    "prepublishOnly": "n8n-node prerelease"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": true,
+    "credentials": [],
+    "nodes": [
+      "dist/nodes/BrowcallGate/BrowcallGate.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "*",
+    "eslint": "9.32.0",
+    "prettier": "3.6.2",
+    "release-it": "^19.0.4",
+    "typescript": "5.9.2"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "n8n-workflow": "^2.2.1"
+  }
+}
