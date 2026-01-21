@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gys_dev/n8n-nodes-browcall-gate.git"
+    "url": "https://github.com/gys-dev/n8n-nodes-browcall-gate.git"
   },
   "scripts": {
     "build": "n8n-node build",
